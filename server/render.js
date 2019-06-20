@@ -42,8 +42,6 @@ export default (pathname, store, context) => {
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
         ${helmet.link.toString()}
-        ${helmet.style.toString()}
-        ${helmet.script.toString()}
         ${helmet.noscript.toString()} 
       </head>
       <body>
