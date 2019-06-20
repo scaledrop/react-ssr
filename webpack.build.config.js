@@ -1,5 +1,6 @@
 const path = require('path');
 const reactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
@@ -16,8 +17,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: '[name].js',
-    filename: '[name].js'
+    filename: 'prod.bundle.js',
+    chunkFilename: '[name].prod.bundle.js',
   },
   module: {
     rules: [
