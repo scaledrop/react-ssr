@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
 
 const env =
@@ -15,8 +16,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
-    chunkFilename: '[name].bundle.js',
+    filename: 'dev.bundle.js',
+    chunkFilename: '[name].dev.bundle.js',
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -24,6 +25,7 @@ module.exports = {
     port: 8080,
     historyApiFallback: true
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -32,16 +34,19 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'sass-loader' },
-        ]
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       }
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'styles.css',
+    }),
     new HtmlWebpackPlugin({
       template: 'template.html'
     }),
